@@ -14,9 +14,9 @@ function App() {
       <h1>NC News</h1>
       <NavBar/>
       <Routes>
-        <Route path='/' element={<AllArticles />} />
+        <Route path='/articles' element={<AllArticles />} />
         <Route path='/articles/:article_id' element={<SingleArticle/>} />
-        <Route path='/topic/:topic' element={<ArticlesByTopic />} />
+        {/* <Route path='/topic/:topic' element={<ArticlesByTopic />} /> */}
       </Routes>
     </div>
   )

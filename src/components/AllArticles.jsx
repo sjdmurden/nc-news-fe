@@ -1,3 +1,5 @@
+import '../App.css'
+
 import { useEffect, useState } from "react";
 import { getAllArticles } from "../api";
 import { Routes, Route } from "react-router-dom";
@@ -9,7 +11,6 @@ const AllArticles = () => {
    useEffect(() => {
       getAllArticles()
       .then((articlesFromApi) => {
-         console.log(articlesFromApi);
          setArticles(articlesFromApi)
       })
    }, [])
@@ -17,7 +18,7 @@ const AllArticles = () => {
    return (
       <div>
          <h2>All Articles</h2>
-         <ul>
+         <ul className="article-list">
             {articles.map((article, i) => {
                return (
                   <ArticleCard article={article} key={i} />
