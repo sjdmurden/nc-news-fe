@@ -7,7 +7,6 @@ const ncNewsApi = axios.create({
 const getAllArticles = () => {
    return ncNewsApi.get('/articles')
    .then((response) => {
-      console.log(response);
       return response.data.articles
    })
    .catch((error) => {
@@ -29,12 +28,12 @@ const getArticlesByTopic = (topic) => {
 const getArticleById = (article_id) => {
    return ncNewsApi.get(`/articles/${article_id}`)
    .then((response) => {
-      console.log(response);
-      return response.data.articles
+      return response.data.article
    })
    .catch((error) => {
       console.dir(error);
     });
 }
+
 
 export {getAllArticles, getArticlesByTopic, getArticleById}
