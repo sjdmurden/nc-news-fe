@@ -5,6 +5,7 @@ import { getArticleById } from "../api";
 import NavBar from "./NavBar";
 import { getArticleComments } from "../api";
 import CommentCard from "./CommentCard";
+import { updateVotes } from "../api";
 
 const SingleArticle = () => {
   const { article_id } = useParams();
@@ -24,6 +25,17 @@ const SingleArticle = () => {
     });
   }, [article_id]);
 
+  const [voteChange, setVoteChange] = useState(0);
+  function handleVote(vote) {
+    //  event.preventDefault();
+    setVoteChange((currChange) => {
+      return currChange + vote;
+    });
+    updateVotes(article_id, vote).then((updatedArticle) => {
+      setArticle(updatedArticle);
+    });
+  }
+
   return (
     <div className="single-article">
       <div className="body">
@@ -36,6 +48,26 @@ const SingleArticle = () => {
         <p>Published: {article.created_at}</p>
         <p>{article.body}</p>
         <p>Votes: {article.votes}</p>
+        
+        <div>
+          <button
+            onClick={() => {
+              handleVote(1);
+            }}
+            disabled={voteChange === 1}
+          >
+            Upvote
+          </button>
+          <button
+            onClick={() => {
+              handleVote(-1);
+            }}
+            disabled={voteChange === -1}
+          >
+            Downvote
+          </button>
+        </div>
+
       </div>
       <div className="comments-section">
         <h2>{article.comment_count} Comments</h2>
