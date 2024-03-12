@@ -21,8 +21,8 @@ const ArticlesByTopic = ({ topic }) => {
          <NavBar/>
          <h2>{`Articles about ${topic}`}</h2>
          <ul>
-            {articles.map((article, i) => (
-               <ArticleCard article={article} key={i} />
+            {articles.map((article, article_id) => (
+               <ArticleCard article={article} key={article_id} />
             ))}
          </ul>
       </div>
