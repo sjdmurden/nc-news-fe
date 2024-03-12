@@ -6,6 +6,7 @@ import NavBar from "./NavBar";
 import { getArticleComments } from "../api";
 import CommentCard from "./CommentCard";
 import { updateVotes } from "../api";
+import AddComment from './AddComment'
 
 const SingleArticle = () => {
   const { article_id } = useParams();
@@ -31,7 +32,8 @@ const SingleArticle = () => {
     setVoteChange((currChange) => {
       return currChange + vote;
     });
-    updateVotes(article_id, vote).then((updatedArticle) => {
+    updateVotes(article_id, vote)
+    .then((updatedArticle) => {
       setArticle(updatedArticle);
     });
   }
@@ -48,7 +50,7 @@ const SingleArticle = () => {
         <p>Published: {article.created_at}</p>
         <p>{article.body}</p>
         <p>Votes: {article.votes}</p>
-        
+
         <div>
           <button
             onClick={() => {
@@ -67,10 +69,13 @@ const SingleArticle = () => {
             Downvote
           </button>
         </div>
-
       </div>
       <div className="comments-section">
         <h2>{article.comment_count} Comments</h2>
+
+        <h3>Add comment</h3>
+        <AddComment article={article}/>
+        
         <ul className="comment-list">
           {comments.map((comment, article_id) => {
             return <CommentCard comment={comment} key={article_id} />;
