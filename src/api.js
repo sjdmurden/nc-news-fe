@@ -57,12 +57,30 @@ const updateVotes = (article_id, voteType) => {
     })
     .catch((error) => {
       console.dir(error);
+      return error
     });
 };
+
+const postComment = (article_id, body, username) => {
+   return ncNewsApi
+   .post(`/articles/${article_id}/comments`, {
+      body: body,
+      username: username
+   })
+   .then((response) => {
+      console.log(response);
+      return response
+    })
+    .catch((error) => {
+      console.dir(error);
+    });
+}
+
 export {
   getAllArticles,
   getArticlesByTopic,
   getArticleById,
   getArticleComments,
   updateVotes,
+  postComment
 };
