@@ -35,5 +35,13 @@ const getArticleById = (article_id) => {
     });
 }
 
-
-export {getAllArticles, getArticlesByTopic, getArticleById}
+const getArticleComments = (article_id) => {
+   return ncNewsApi.get(`/articles/${article_id}/comments`)
+   .then((response) => {
+      return response.data.comments
+   })
+   .catch((error) => {
+      console.dir(error);
+    });
+}
+export {getAllArticles, getArticlesByTopic, getArticleById, getArticleComments}
