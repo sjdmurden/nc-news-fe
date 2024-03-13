@@ -68,12 +68,22 @@ const postComment = (article_id, body, username) => {
       username: username
    })
    .then((response) => {
-      console.log(response.data.comment);
       return response.data.comment
     })
     .catch((error) => {
       console.dir(error);
     });
+}
+
+const deleteComment = (comment_id) => {
+   return ncNewsApi
+      .delete(`/comments/${comment_id}`)
+      .then((response) => {
+         return response
+      })
+      .catch((error) => {
+         console.dir(error);
+       });
 }
 
 export {
@@ -82,5 +92,6 @@ export {
   getArticleById,
   getArticleComments,
   updateVotes,
-  postComment
+  postComment,
+  deleteComment
 };

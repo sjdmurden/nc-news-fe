@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { postComment } from "../api";
 import { UserContext } from "./UserContext";
 
-const AddComment = ({article}) => {
+const AddComment = ({article, setComments}) => {
   const {loggedInUser, setLoggedInUser} = useContext(UserContext)
   const [commentBody, setCommentBody] = useState('')
   const [emptyBody, setEmptyBody] = useState(false)
@@ -12,7 +12,7 @@ const AddComment = ({article}) => {
 
   function handleSubmit(event) {
     event.preventDefault();
-    if (submitting) return;
+    if (submitting) return
     
     if(commentBody === ''){
       setEmptyBody(true)
@@ -22,6 +22,7 @@ const AddComment = ({article}) => {
     setSubmitting(true)
     postComment(article.article_id, commentBody, loggedInUser.username)
     .then((newComment) => {
+      setComments((oldComments) => [newComment, ...oldComments]);
       setSubmitting(false)
       setCommentBody('')
       setSuccessMessage('Comment posted!')
