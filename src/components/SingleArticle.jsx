@@ -74,11 +74,11 @@ const SingleArticle = () => {
         <h2>{article.comment_count} Comments</h2>
 
         <h3>Add comment</h3>
-        <AddComment article={article}/>
+        <AddComment article={article} setComments={setComments}/>
         
         <ul className="comment-list">
           {comments.map((comment, article_id) => {
-            return <CommentCard comment={comment} key={article_id} />;
+            return <CommentCard comment={comment} setComments={setComments} key={article_id} />;
           })}
         </ul>
       </div>
