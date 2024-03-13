@@ -68,8 +68,8 @@ const postComment = (article_id, body, username) => {
       username: username
    })
    .then((response) => {
-      console.log(response);
-      return response
+      console.log(response.data.comment);
+      return response.data.comment
     })
     .catch((error) => {
       console.dir(error);
