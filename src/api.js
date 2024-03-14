@@ -4,9 +4,9 @@ const ncNewsApi = axios.create({
   baseURL: "https://nc-news-7ps8.onrender.com/api",
 });
 
-const getAllArticles = () => {
+const getAllArticles = (sort_by, order_by) => {
   return ncNewsApi
-    .get("/articles")
+    .get(`/articles?sort_by=${sort_by}&order_by=${order_by}`)
     .then((response) => {
       return response.data.articles;
     })
@@ -15,11 +15,11 @@ const getAllArticles = () => {
     });
 };
 
-const getArticlesByTopic = (topic) => {
+const getArticlesByTopic = (topic, sort_by, order_by) => {
   return ncNewsApi
-    .get(`/articles?topic=${topic}`)
+    .get(`/articles?topic=${topic}&sort_by=${sort_by}&order_by=${order_by}`)
     .then((response) => {
-      console.log(response);
+      console.log(response.data.articles);
       return response.data.articles;
     })
     .catch((error) => {
@@ -51,40 +51,40 @@ const getArticleComments = (article_id) => {
 
 const updateVotes = (article_id, voteType) => {
   return ncNewsApi
-    .patch(`/articles/${article_id}`, {inc_votes: voteType})
+    .patch(`/articles/${article_id}`, { inc_votes: voteType })
     .then((response) => {
-      return response.data.updatedArticle
+      return response.data.updatedArticle;
     })
     .catch((error) => {
       console.dir(error);
-      return error
+      return error;
     });
 };
 
 const postComment = (article_id, body, username) => {
-   return ncNewsApi
-   .post(`/articles/${article_id}/comments`, {
+  return ncNewsApi
+    .post(`/articles/${article_id}/comments`, {
       body: body,
-      username: username
-   })
-   .then((response) => {
-      return response.data.comment
+      username: username,
+    })
+    .then((response) => {
+      return response.data.comment;
     })
     .catch((error) => {
       console.dir(error);
     });
-}
+};
 
 const deleteComment = (comment_id) => {
-   return ncNewsApi
-      .delete(`/comments/${comment_id}`)
-      .then((response) => {
-         return response
-      })
-      .catch((error) => {
-         console.dir(error);
-       });
-}
+  return ncNewsApi
+    .delete(`/comments/${comment_id}`)
+    .then((response) => {
+      return response;
+    })
+    .catch((error) => {
+      console.dir(error);
+    });
+};
 
 export {
   getAllArticles,
@@ -93,5 +93,5 @@ export {
   getArticleComments,
   updateVotes,
   postComment,
-  deleteComment
+  deleteComment,
 };
