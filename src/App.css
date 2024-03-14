@@ -5,7 +5,7 @@
 }
 
 * {
-  background: rgb(252, 252, 252);
+  background: rgb(248, 221, 221);
 }
 .App{
   padding: 1rem;
@@ -37,13 +37,9 @@ span.italic {
 }
 
 .article-card{
-  border: 5px solid rgb(0, 0, 0);
-  border-radius: 1rem;
-  width: 18rem;
-  height: 20rem;
+
   margin: 0.3rem;
-  padding-left: 1rem;
-  font-size: 0.8rem;
+
 }
 
 #image {
@@ -86,4 +82,11 @@ span.italic {
 
 #commentBody {
   color: black;
+}
+
+.sort-buttons{
+  margin-bottom: 10px;
+}
+.order-buttons{
+  margin-right: 0px;
 }
