@@ -6,24 +6,37 @@ import NavBar from "./NavBar";
 import { getArticleComments } from "../api";
 import CommentCard from "./CommentCard";
 import { updateVotes } from "../api";
-import AddComment from './AddComment'
+import AddComment from "./AddComment";
+import NotFoundPage from "./NotFoundPage";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 
 const SingleArticle = () => {
   const { article_id } = useParams();
   const [article, setArticle] = useState({});
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    getArticleById(article_id).then((article) => {
-      setArticle(article);
-    });
+    getArticleById(article_id)
+      .then((article) => {
+        setArticle(article);
+      })
+      .catch((error) => {
+        console.log("Error fetching article: ", error.message);
+        setError(error);
+      });
   }, [article_id]);
 
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
-    getArticleComments(article_id).then((comments) => {
-      setComments(comments);
-    });
+    getArticleComments(article_id)
+      .then((comments) => {
+        setComments(comments);
+      })
+      .catch((error) => {
+        console.log("Error fetching comments: ", error.message);
+        setError(error);
+      });
   }, [article_id]);
 
   const [voteChange, setVoteChange] = useState(0);
@@ -32,10 +45,12 @@ const SingleArticle = () => {
     setVoteChange((currChange) => {
       return currChange + vote;
     });
-    updateVotes(article_id, vote)
-    .then((updatedArticle) => {
+    updateVotes(article_id, vote).then((updatedArticle) => {
       setArticle(updatedArticle);
     });
+  }
+  if (error) {
+    return <NotFoundPage error={error} />;
   }
 
   return (
@@ -58,7 +73,7 @@ const SingleArticle = () => {
             }}
             disabled={voteChange === 1}
           >
-            Upvote
+            <span className="material-icons-outlined">thumb_up</span>
           </button>
           <button
             onClick={() => {
@@ -74,11 +89,17 @@ const SingleArticle = () => {
         <h2>{article.comment_count} Comments</h2>
 
         <h3>Add comment</h3>
-        <AddComment article={article} setComments={setComments}/>
-        
+        <AddComment article={article} setComments={setComments} />
+
         <ul className="comment-list">
           {comments.map((comment, article_id) => {
-            return <CommentCard comment={comment} setComments={setComments} key={article_id} />;
+            return (
+              <CommentCard
+                comment={comment}
+                setComments={setComments}
+                key={article_id}
+              />
+            );
           })}
         </ul>
       </div>

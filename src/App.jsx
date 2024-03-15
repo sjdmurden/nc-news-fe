@@ -6,6 +6,8 @@ import AllArticles from "./components/AllArticles";
 import ArticlesByTopic from "./components/ArticlesByTopic";
 import SingleArticle from "./components/SingleArticle";
 import {UserContext} from "./components/UserContext";
+import NotFoundPage from './components/NotFoundPage'
+import WelcomePage from './components/WelcomePage'
 
 function App() {
 
@@ -17,6 +19,9 @@ function App() {
           <Route path="/articles" element={<AllArticles />} />
           <Route path="/articles/:article_id" element={<SingleArticle />} />
           <Route path='/articles/topic/:topic' element={<ArticlesByTopic />} />
+          <Route path="/" element={<WelcomePage />} />
+
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
   );
