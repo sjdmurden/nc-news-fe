@@ -13,16 +13,21 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import DateFormat from "./DateFormat";
+import ThumbUpRoundedIcon from '@mui/icons-material/ThumbUpRounded';
+import ThumbDownAltRoundedIcon from '@mui/icons-material/ThumbDownAltRounded';
 
 const SingleArticle = () => {
   const { article_id } = useParams();
   const [article, setArticle] = useState({});
   const [error, setError] = useState(null);
+  const [dateString, setDateString] = useState('')
 
   useEffect(() => {
     getArticleById(article_id)
       .then((article) => {
-        setArticle(article);
+        setArticle(article)
+        setDateString(article.created_at)
       })
       .catch((error) => {
         console.log("Error fetching article: ", error.message);
@@ -59,54 +64,6 @@ const SingleArticle = () => {
 
   return (
     <div className="single-article">
-      {/* <div className="body">
-        <img src={article.article_img_url} id="single-article-image"></img>
-        <h2>{article.title}</h2>
-        <p>
-          Written by <span className="italic">{article.author}</span>
-        </p>
-        <p>Topic: {article.topic}</p>
-        <p>Published: {article.created_at}</p>
-        <p>{article.body}</p>
-        <p>Votes: {article.votes}</p>
-
-        <div>
-          <button
-            onClick={() => {
-              handleVote(1);
-            }}
-            disabled={voteChange === 1}
-          >
-            <span className="material-icons-outlined">thumb_up</span>
-          </button>
-          <button
-            onClick={() => {
-              handleVote(-1);
-            }}
-            disabled={voteChange === -1}
-          >
-            Downvote
-          </button>
-        </div>
-      </div>
-      <div className="comments-section">
-        <h2>{article.comment_count} Comments</h2>
-
-        <h3>Add comment</h3>
-        <AddComment article={article} setComments={setComments} />
-
-        <ul className="comment-list">
-          {comments.map((comment, article_id) => {
-            return (
-              <CommentCard
-                comment={comment}
-                setComments={setComments}
-                key={article_id}
-              />
-            );
-          })}
-        </ul>
-      </div> */}
       <Card sx={{ maxWidth: 645 }}>
       <CardMedia
         sx={{ height: 300 }}
@@ -123,17 +80,17 @@ const SingleArticle = () => {
           Written by <span className="italic">{article.author}</span>
         </p>
         <p>Topic: {article.topic}</p>
-        <p>Published: {article.created_at}</p>
+        <DateFormat dateString={dateString}/>
         <p>Votes: {article.votes}</p>
         </Typography>
-        <div>
+        <div className="vote-buttons">
           <button
             onClick={() => {
               handleVote(1);
             }}
             disabled={voteChange === 1}
           >
-            Upvote
+            <ThumbUpRoundedIcon/>
           </button>
           <button
             onClick={() => {
@@ -141,7 +98,7 @@ const SingleArticle = () => {
             }}
             disabled={voteChange === -1}
           >
-            Downvote
+            <ThumbDownAltRoundedIcon/>
           </button>
         </div>
       </CardContent>
@@ -163,10 +120,6 @@ const SingleArticle = () => {
           })}
         </ul>
       </div>
-      <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
-      </CardActions>
     </Card>
     </div>
   );

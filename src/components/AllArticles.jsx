@@ -4,7 +4,7 @@ import { getAllArticles } from "../api";
 import { Routes, Route, useSearchParams, useParams } from "react-router-dom";
 import ArticleCard from "./ArticleCard";
 import NotFoundPage from "./NotFoundPage";
-
+import DateFormat from "./DateFormat";
 
 const AllArticles = () => {
   const [articles, setArticles] = useState([]);
@@ -43,19 +43,21 @@ const AllArticles = () => {
 
   return (
     <div>
-      <h2>Articles</h2>
+      <h2>{topic ? `Articles on ${topic}` : "All Articles"}</h2>
       <div className="sort-buttons">
-        <p>sort by</p>
-        <button onClick={() => setSortBy("created_at")}>Date</button>
-        <button onClick={() => setSortBy("comment_count")}>
-          No. of Comments
-        </button>
-        <button onClick={() => setSortBy("votes")}>Votes</button>
+        <label htmlFor="sort-select">Sort by: </label>
+        <select id="sort-select" onChange={(e) => setSortBy(e.target.value)}>
+          <option value="created_at">Date</option>
+          <option value="comment_count">No. of Comments</option>
+          <option value="votes">Votes</option>
+        </select>
       </div>
       <div className="order-buttons">
-        <p>Order by</p>
-        <button onClick={() => setOrderBy("ASC")}>Ascending</button>
-        <button onClick={() => setOrderBy("DESC")}>Descending</button>
+        <label htmlFor="order-select">Order by: </label>
+        <select id="order-select" onChange={(e) => setOrderBy(e.target.value)}>
+          <option value="DESC">Descending</option>
+          <option value="ASC">Ascending</option>
+        </select>
       </div>
       <ul className="article-list">
         {articles.map((article, article_id) => {

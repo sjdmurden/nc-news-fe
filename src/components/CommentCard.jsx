@@ -2,6 +2,8 @@ import { useState, useContext, useEffect } from "react";
 import { deleteComment } from "../api";
 import { UserContext } from "./UserContext";
 import "../App.css";
+import DateFormat from "./DateFormat";
+
 
 const CommentCard = ({ comment, setComments }) => {
   const { loggedInUser, setLoggedInUser } = useContext(UserContext);
@@ -29,16 +31,16 @@ const CommentCard = ({ comment, setComments }) => {
 
   return (
     <div className="single-comment">
-      <div className="delete-button">
+      <div >
         {loggedInUser.username === comment.author ? (
-          <button onClick={removeComment} disabled={submitting}>
+          <button className="delete-button" onClick={removeComment} disabled={submitting}>
             X
           </button>
         ) : null}
       </div>
       <span className="italic">{comment.author}</span>
       <p>{comment.body}</p>
-      <p>{comment.created_at}</p>
+      <DateFormat dateString={comment.created_at}/>
       <p>Votes: {comment.votes}</p>
       {submitting ? "Deleting..." : null}
     </div>

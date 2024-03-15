@@ -38,9 +38,10 @@ const AddComment = ({article, setComments}) => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className='comment-form' onSubmit={handleSubmit}>
       <label htmlFor="commentBody">Comment:</label>
       <textarea 
+      className="textarea"
         id="commentBody"
         value={commentBody}
         onChange={(event) => {
@@ -48,7 +49,7 @@ const AddComment = ({article, setComments}) => {
         }}
         disabled={submitting}
       />
-      <button>
+      <button className="post-button">
         {submitting ? "Posting..." : "Post"}
       </button>
       {error ? <p>{error}</p> : null}
