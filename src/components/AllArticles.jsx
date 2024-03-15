@@ -44,20 +44,25 @@ const AllArticles = () => {
   return (
     <div>
       <h2>{topic ? `Articles on ${topic}` : "All Articles"}</h2>
-      <div className="sort-buttons">
-        <label htmlFor="sort-select">Sort by: </label>
-        <select id="sort-select" onChange={(e) => setSortBy(e.target.value)}>
-          <option value="created_at">Date</option>
-          <option value="comment_count">No. of Comments</option>
-          <option value="votes">Votes</option>
-        </select>
-      </div>
-      <div className="order-buttons">
-        <label htmlFor="order-select">Order by: </label>
-        <select id="order-select" onChange={(e) => setOrderBy(e.target.value)}>
-          <option value="DESC">Descending</option>
-          <option value="ASC">Ascending</option>
-        </select>
+      <div className="sortOrder">
+        <div className="sort-buttons">
+          <label htmlFor="sort-select">Sort by: </label>
+          <select id="sort-select" onChange={(e) => setSortBy(e.target.value)}>
+            <option value="created_at">Date</option>
+            <option value="comment_count">No. of Comments</option>
+            <option value="votes">Votes</option>
+          </select>
+        </div>
+        <div className="order-buttons">
+          <label htmlFor="order-select">Order by: </label>
+          <select
+            id="order-select"
+            onChange={(e) => setOrderBy(e.target.value)}
+          >
+            <option value="DESC">Descending</option>
+            <option value="ASC">Ascending</option>
+          </select>
+        </div>
       </div>
       <ul className="article-list">
         {articles.map((article, article_id) => {

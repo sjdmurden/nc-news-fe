@@ -29,14 +29,18 @@
   align-content: flex-start;
 }
 
-
-
-.sort-buttons, .order-buttons {
-  align-items: center;
+.sortOrder{
+  display: flex;
+  flex-direction: row;
 }
 
-.order-buttons {
-  margin-left: auto;
+.sort-buttons, .order-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  border-radius: 4px;
+  width: fit-content;
+  margin-right: 1rem;
 }
 
 .sort-buttons button, .order-buttons button {
