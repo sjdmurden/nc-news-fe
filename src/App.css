@@ -5,7 +5,7 @@
 }
 
 * {
-  background: rgb(248, 221, 221);
+  background: rgb(255, 255, 255);
 }
 .App{
   padding: 1rem;
@@ -13,10 +13,6 @@
 
 .card {
   padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
 }
 
 #nav {
@@ -31,15 +27,19 @@
   flex-basis: 33.333%;
   align-content: flex-start;
 }
+.mui{
+  background: black;
+}
+.date{
+  color: black;
+}
 
 span.italic {
   font-style: italic;
 }
 
 .article-card{
-
   margin: 0.3rem;
-
 }
 
 #image {

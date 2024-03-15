@@ -2,9 +2,13 @@ import ArticleCard from "./ArticleCard";
 import { useEffect, useState } from "react";
 import { getArticlesByTopic } from "../api";
 import { useParams, useSearchParams } from "react-router-dom";
+import NotFoundPage from "./NotFoundPage";
+
 
 const ArticlesByTopic = () => {
   const [articles, setArticles] = useState([]);
+  const [error, setError] = useState(null);
+
   const { topic } = useParams();
   let [searchParams, setSearchParams] = useSearchParams();
   const sortByQuery = searchParams.get("sort_by");
@@ -29,15 +33,22 @@ const ArticlesByTopic = () => {
       })
       .catch((error) => {
         console.error("Error fetching articles by topic:", error);
+        setError(error);
       });
   }, [topic, sortByQuery, orderQuery]);
+
+  if (error) {
+    return <NotFoundPage error={error} />;
+  }
 
   return (
     <div>
       <div className="sort-buttons">
         <p>sort by</p>
         <button onClick={() => setSortBy("created_at")}>Date</button>
-        <button onClick={() => setSortBy("comment_count")}>No. of Comments</button>
+        <button onClick={() => setSortBy("comment_count")}>
+          No. of Comments
+        </button>
         <button onClick={() => setSortBy("votes")}>Votes</button>
       </div>
       <div className="order-buttons">

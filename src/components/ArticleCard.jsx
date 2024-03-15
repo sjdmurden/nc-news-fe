@@ -11,13 +11,13 @@ import Typography from "@mui/material/Typography";
 const ArticleCard = ({ article }) => {
   return (
     <div className="article-card">
-      <Card sx={{ maxWidth: 345 }}>
+      <Card sx={{ maxWidth: 345}}>
         <CardMedia
           sx={{ height: 140 }}
           image={article.article_img_url}
           title="article_img_url"
         />
-        <CardContent>
+        <CardContent style={{}}>
           <Typography gutterBottom variant="h5" component="span">
             <Link to={`/articles/${article.article_id}`} article={article}>
               <span>{article.title}</span><br/>

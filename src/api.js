@@ -10,21 +10,16 @@ const getAllArticles = (sort_by, order_by) => {
     .then((response) => {
       return response.data.articles;
     })
-    .catch((error) => {
-      console.dir(error);
-    });
+    
 };
 
 const getArticlesByTopic = (topic, sort_by, order_by) => {
   return ncNewsApi
     .get(`/articles?topic=${topic}&sort_by=${sort_by}&order_by=${order_by}`)
     .then((response) => {
-      console.log(response.data.articles);
       return response.data.articles;
     })
-    .catch((error) => {
-      console.dir(error);
-    });
+    
 };
 
 const getArticleById = (article_id) => {
@@ -33,9 +28,7 @@ const getArticleById = (article_id) => {
     .then((response) => {
       return response.data.article;
     })
-    .catch((error) => {
-      console.dir(error);
-    });
+    
 };
 
 const getArticleComments = (article_id) => {
@@ -44,9 +37,7 @@ const getArticleComments = (article_id) => {
     .then((response) => {
       return response.data.comments;
     })
-    .catch((error) => {
-      console.dir(error);
-    });
+   
 };
 
 const updateVotes = (article_id, voteType) => {
@@ -55,10 +46,7 @@ const updateVotes = (article_id, voteType) => {
     .then((response) => {
       return response.data.updatedArticle;
     })
-    .catch((error) => {
-      console.dir(error);
-      return error;
-    });
+    
 };
 
 const postComment = (article_id, body, username) => {
@@ -70,9 +58,7 @@ const postComment = (article_id, body, username) => {
     .then((response) => {
       return response.data.comment;
     })
-    .catch((error) => {
-      console.dir(error);
-    });
+    
 };
 
 const deleteComment = (comment_id) => {
@@ -81,9 +67,7 @@ const deleteComment = (comment_id) => {
     .then((response) => {
       return response;
     })
-    .catch((error) => {
-      console.dir(error);
-    });
+    
 };
 
 export {
